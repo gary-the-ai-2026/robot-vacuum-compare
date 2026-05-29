@@ -6,36 +6,38 @@
 <title>Robot Vacuum &amp; Mop Comparison — June 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f8f7f4;
-    --bg-alt: #f0eeea;
+    --canvas: #faf9f5;
+    --surface-alt: #f0eeea;
     --surface: #ffffff;
-    --border: #e4e1db;
-    --border-light: #ece9e4;
-    --text: #1a1a18;
-    --text-secondary: #5c5a55;
-    --text-muted: #94918a;
-    --accent: #d4790e;
+    --hairline: #e4e1db;
+    --hairline-soft: #ece9e4;
+    --ink: #141413;
+    --body: #5c5a55;
+    --muted: #94918a;
+    --coral: #cc785c;
+    --coral-hover: #a9583e;
     --blue: #1a73e8;
     --green: #1b8a3d;
     --amber: #c2680c;
     --purple: #7c3aed;
     --winner: #1b8a3d;
-    --card-radius: 20px;
+    --radius-card: 20px;
+    --radius-btn: 6px;
     --section-gap: 100px;
     --max-width: 1340px;
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
-    --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+    --shadow-rest: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.08);
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    background: var(--canvas);
+    color: var(--ink);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
@@ -52,7 +54,7 @@
   .hero {
     text-align: center;
     padding: 120px 20px 100px;
-    background: linear-gradient(180deg, #fdfcf9 0%, var(--bg) 100%);
+    background: linear-gradient(180deg, #fdfcf9 0%, var(--canvas) 100%);
     position: relative;
     overflow: hidden;
   }
@@ -62,26 +64,29 @@
     top: -50%; left: 50%;
     transform: translateX(-50%);
     width: 900px; height: 900px;
-    background: radial-gradient(ellipse at center, rgba(26,115,232,0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse at center, rgba(26,115,232,0.035) 0%, transparent 70%);
     pointer-events: none;
   }
   .hero-label {
     display: inline-block;
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: 0.75rem; font-weight: 600; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--text-muted);
+    text-transform: uppercase; color: var(--muted);
     margin-bottom: 24px;
-    border: 1px solid var(--border); border-radius: 100px;
+    border: 1px solid var(--hairline); border-radius: 100px;
     padding: 8px 20px; background: var(--surface);
   }
   .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
     font-size: clamp(2.4rem, 5vw, 3.8rem);
-    font-weight: 900; letter-spacing: -1.5px;
+    font-weight: 900;
     line-height: 1.1; margin-bottom: 16px;
-    color: #111;
+    color: var(--ink);
   }
-  .hero h1 span { color: var(--accent); }
+  .hero h1 span { color: var(--coral); }
   .hero .subtitle {
-    font-size: 1.15rem; color: var(--text-secondary);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 1.15rem; color: var(--body);
     max-width: 600px; margin: 0 auto 40px;
   }
   .hero-meta {
@@ -90,19 +95,24 @@
   }
   .hero-stat { text-align: center; }
   .hero-stat .num { font-size: 1.6rem; font-weight: 800; }
-  .hero-stat .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+  .hero-stat .label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
   .section { padding: var(--section-gap) 0; }
   .section-header { text-align: center; margin-bottom: 56px; }
   .section-header .kicker {
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: 0.75rem; font-weight: 600; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    text-transform: uppercase; color: var(--coral); margin-bottom: 12px;
   }
   .section-header h2 {
-    font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; color: #111;
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-size: 2.4rem; font-weight: 900;
+    color: var(--ink);
+    line-height: 1.15;
   }
   .section-header p {
-    color: var(--text-secondary); max-width: 560px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--body); max-width: 560px;
     margin: 12px auto 0; font-size: 0.95rem;
   }
 
@@ -113,16 +123,16 @@
   }
   .card {
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--card-radius);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-card);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-rest);
   }
   .card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-hover);
   }
 
   .card-img {
@@ -140,23 +150,22 @@
     max-height: 80%;
     object-fit: contain;
   }
-  .card-img .placeholder-icon {
-    font-size: 4rem;
-    opacity: 0.15;
-  }
 
   .card-top {
     padding: 24px 24px 16px;
     text-align: center;
   }
   .card-top .brand {
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: 0.7rem; font-weight: 600; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
   }
   .card-top h3 {
-    font-size: 1.05rem; font-weight: 700; line-height: 1.3; margin-bottom: 16px;
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 1.1rem; font-weight: 700; line-height: 1.3; margin-bottom: 16px;
   }
   .card-top .price {
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: 2.4rem; font-weight: 900; letter-spacing: -1px; line-height: 1;
   }
   .card.x8 .price { color: var(--blue); }
@@ -165,7 +174,7 @@
   .card.x40 .price { color: var(--purple); }
 
   .card-top .was {
-    font-size: 0.8rem; color: var(--text-muted);
+    font-size: 0.8rem; color: var(--muted);
     text-decoration: line-through; margin-top: 4px;
   }
   .card-top .discount {
@@ -180,53 +189,53 @@
   }
   .card-body .spec-row {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0; border-bottom: 1px solid var(--border-light);
+    padding: 8px 0; border-bottom: 1px solid var(--hairline-soft);
     font-size: 0.83rem;
   }
   .card-body .spec-row:last-child { border-bottom: none; }
-  .card-body .spec-row .spec-label { color: var(--text-muted); font-size: 0.76rem; }
+  .card-body .spec-row .spec-label { color: var(--muted); font-size: 0.76rem; }
   .card-body .spec-row .spec-value { font-weight: 600; text-align: right; font-size: 0.83rem; }
   .card-body .spec-row .spec-value.best { color: var(--winner); }
 
   .card-footer {
     padding: 14px 20px 20px;
     text-align: center;
-    border-top: 1px solid var(--border-light);
-    background: var(--bg-alt);
+    border-top: 1px solid var(--hairline-soft);
+    background: var(--surface-alt);
   }
   .card-footer .expert {
     font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
-    color: var(--text-muted); margin-bottom: 4px;
+    color: var(--muted); margin-bottom: 4px;
   }
   .card-footer .tagline { font-weight: 700; font-size: 0.95rem; margin-bottom: 6px; }
-  .card-footer .stores { font-size: 0.75rem; color: var(--text-muted); }
+  .card-footer .stores { font-size: 0.75rem; color: var(--muted); }
 
-  .card.recommended { border-color: rgba(212,121,14,0.35); box-shadow: 0 2px 16px rgba(212,121,14,0.08); }
+  .card.recommended { border-color: rgba(204,120,92,0.35); box-shadow: 0 2px 16px rgba(204,120,92,0.08); }
   .card.recommended::before {
     content: 'Our Pick';
     position: absolute; top: 16px; right: 16px;
-    background: var(--accent); color: #fff;
+    background: var(--coral); color: #fff;
     font-size: 0.65rem; font-weight: 800; letter-spacing: 1.5px;
     text-transform: uppercase; padding: 4px 12px;
     border-radius: 100px; z-index: 2;
   }
 
-  .table-section { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .table-section { background: var(--surface-alt); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
   .table-wrap {
     overflow-x: auto; border-radius: 16px;
-    border: 1px solid var(--border); background: var(--surface);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--hairline); background: var(--surface);
+    box-shadow: var(--shadow-rest);
   }
   table { width: 100%; border-collapse: collapse; min-width: 780px; }
   thead th {
-    background: var(--bg-alt); padding: 16px 20px;
+    background: var(--surface-alt); padding: 16px 20px;
     text-align: left; font-weight: 700; font-size: 0.82rem;
-    letter-spacing: 0.5px; border-bottom: 2px solid var(--border);
-    color: var(--text);
+    letter-spacing: 0.5px; border-bottom: 2px solid var(--hairline);
+    color: var(--ink);
   }
-  thead th:first-child { color: var(--text-muted); width: 200px; font-weight: 500; }
+  thead th:first-child { color: var(--muted); width: 200px; font-weight: 500; }
   tbody td {
-    padding: 13px 20px; border-bottom: 1px solid var(--border-light);
+    padding: 13px 20px; border-bottom: 1px solid var(--hairline-soft);
     font-size: 0.85rem;
   }
   tbody tr:last-child td { border-bottom: none; }
@@ -236,14 +245,15 @@
 
   .avoid-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .avoid-card {
-    background: var(--surface); border: 1px solid var(--border);
+    background: var(--surface); border: 1px solid var(--hairline);
     border-radius: 16px; padding: 28px 24px;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-rest);
     transition: border-color 0.3s ease;
   }
   .avoid-card .tech-label {
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: 0.68rem; font-weight: 600; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
   }
   .avoid-card .stars {
     font-size: 1.4rem; letter-spacing: 3px; margin-bottom: 14px;
@@ -254,28 +264,28 @@
   .avoid-card.x40 .stars { color: var(--purple); }
   .avoid-card .avoid-desc {
     font-size: 0.85rem; line-height: 1.65;
-    color: var(--text-secondary); margin-bottom: 14px;
+    color: var(--body); margin-bottom: 14px;
   }
-  .avoid-card .avoid-desc strong { color: var(--text); }
+  .avoid-card .avoid-desc strong { color: var(--ink); }
   .avoid-card .caveat {
-    font-size: 0.75rem; color: var(--text-muted);
-    padding: 10px 14px; background: var(--bg-alt);
-    border-radius: 8px; border-left: 2px solid var(--border);
+    font-size: 0.75rem; color: var(--muted);
+    padding: 10px 14px; background: var(--surface-alt);
+    border-radius: 8px; border-left: 2px solid var(--hairline);
   }
   .honest-note {
     text-align: center; margin-top: 32px; padding: 20px 28px;
-    background: var(--bg-alt); border: 1px solid var(--border);
-    border-radius: 12px; font-size: 0.85rem; color: var(--text-muted);
+    background: var(--surface-alt); border: 1px solid var(--hairline);
+    border-radius: 12px; font-size: 0.85rem; color: var(--muted);
     max-width: 750px; margin-left: auto; margin-right: auto;
   }
-  .honest-note strong { color: var(--text-secondary); }
+  .honest-note strong { color: var(--body); }
 
-  .decision-section { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .decision-section { background: var(--surface-alt); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
   .decision-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .decision-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--card-radius); padding: 28px 24px;
-    box-shadow: var(--shadow-sm);
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: var(--radius-card); padding: 28px 24px;
+    box-shadow: var(--shadow-rest);
   }
   .decision-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 18px; line-height: 1.4; }
   .decision-card.x8 h4 { color: var(--blue); }
@@ -284,69 +294,70 @@
   .decision-card.x40 h4 { color: var(--purple); }
   .decision-card ul { list-style: none; font-size: 0.84rem; }
   .decision-card li {
-    padding: 6px 0; border-bottom: 1px solid var(--border-light);
-    color: var(--text-secondary);
+    padding: 6px 0; border-bottom: 1px solid var(--hairline-soft);
+    color: var(--body);
   }
   .decision-card li:last-child { border-bottom: none; }
-  .decision-card li strong { color: var(--text); }
+  .decision-card li strong { color: var(--ink); }
 
   .retailer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .retailer-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 14px; padding: 24px; box-shadow: var(--shadow-sm);
+    background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 14px; padding: 24px; box-shadow: var(--shadow-rest);
   }
   .retailer-card h5 { font-size: 0.85rem; font-weight: 700; margin-bottom: 14px; }
   .retailer-card .r-item {
     display: flex; justify-content: space-between; align-items: baseline;
     padding: 5px 0; font-size: 0.81rem;
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--hairline-soft);
   }
   .retailer-card .r-item:last-child { border-bottom: none; }
   .retailer-card .r-price { font-weight: 700; }
   .retailer-card .r-note {
-    font-size: 0.72rem; color: var(--text-muted);
+    font-size: 0.72rem; color: var(--muted);
     margin-top: 10px; font-style: italic;
   }
 
   .verdict {
     margin-top: 40px; padding: 36px 40px;
-    background: linear-gradient(135deg, rgba(212,121,14,0.06) 0%, rgba(212,121,14,0.01) 100%);
-    border: 1px solid rgba(212,121,14,0.3); border-radius: 16px;
+    background: linear-gradient(135deg, rgba(204,120,92,0.06) 0%, rgba(204,120,92,0.01) 100%);
+    border: 1px solid rgba(204,120,92,0.3); border-radius: 16px;
     text-align: center; position: relative; overflow: hidden;
   }
   .verdict::before {
     content: '';
     position: absolute; top: -100px; right: -100px;
     width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(212,121,14,0.04) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(204,120,92,0.04) 0%, transparent 70%);
     pointer-events: none;
   }
   .verdict .verdict-label {
+    font-family: 'Inter', -apple-system, sans-serif;
     font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+    text-transform: uppercase; color: var(--coral); margin-bottom: 12px;
   }
-  .verdict h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; color: #111; }
-  .verdict h3 span { color: var(--accent); }
+  .verdict h3 { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; color: var(--ink); }
+  .verdict h3 span { color: var(--coral); }
   .verdict p {
-    color: var(--text-secondary); max-width: 640px; margin: 0 auto;
+    color: var(--body); max-width: 640px; margin: 0 auto;
     font-size: 0.92rem; line-height: 1.7;
   }
   .verdict .alt-options {
     margin-top: 20px; display: flex; justify-content: center;
     gap: 28px; flex-wrap: wrap;
   }
-  .verdict .alt-option { font-size: 0.82rem; color: var(--text-muted); }
-  .verdict .alt-option strong { color: var(--text-secondary); }
+  .verdict .alt-option { font-size: 0.82rem; color: var(--muted); }
+  .verdict .alt-option strong { color: var(--body); }
 
   footer {
     text-align: center; padding: 48px 20px;
-    color: var(--text-muted); font-size: 0.78rem;
-    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.78rem;
+    border-top: 1px solid var(--hairline);
   }
-  .card-footer .stores a { color: var(--text-muted); text-decoration: none; }
-  .card-footer .stores a:hover { color: var(--accent); text-decoration: underline; }
-  footer a { color: var(--text-secondary); text-decoration: none; }
-  footer a:hover { color: var(--text); }
+  .card-footer .stores a { color: var(--muted); text-decoration: none; }
+  .card-footer .stores a:hover { color: var(--coral); text-decoration: underline; }
+  footer a { color: var(--body); text-decoration: none; }
+  footer a:hover { color: var(--ink); }
   footer .footer-row { margin-top: 6px; }
 
   @media (max-width: 1200px) {
@@ -355,14 +366,20 @@
   }
   @media (max-width: 640px) {
     .hero { padding: 80px 16px 60px; }
-    .hero h1 { font-size: 2rem; }
+    .hero h1 { font-size: 2.2rem; }
     .hero-meta { gap: 20px; }
+    .section-header h2 { font-size: 1.8rem; }
     .card-grid, .avoid-grid, .decision-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
     .retailer-grid { grid-template-columns: 1fr; }
     .card-top .price { font-size: 2rem; }
     .section { padding: 60px 0; }
     .verdict { padding: 24px 20px; }
     .verdict h3 { font-size: 1.3rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .card { transition: none; }
   }
 </style>
 </head>
@@ -531,12 +548,12 @@
           <tr><td>Price (AUD)</td><td class="winner-cell">$1,249</td><td class="winner-cell">$999</td><td>$1,499</td><td>$1,999</td></tr>
           <tr><td>RRP</td><td>$2,499</td><td>$1,807</td><td>$2,799</td><td>$2,499</td></tr>
           <tr><td>Suction Power</td><td>18,000 Pa</td><td>8,000 Pa</td><td class="winner-cell">18,500 Pa</td><td>12,000 Pa</td></tr>
-          <tr><td>Mop Type</td><td>Roller — self-cleans mid-run</td><td class="winner-cell">HydroJet roller — best mopping</td><td>Dual spinning — extendable arm</td><td class="winner-cell">Dual rotating — MopExtend™ arm</td></tr>
+          <tr><td>Mop Type</td><td>Roller — self-cleans mid-run</td><td class="winner-cell">HydroJet roller — best mopping</td><td>Dual spinning — extendable arm</td><td class="winner-cell">Dual rotating — MopExtend&trade; arm</td></tr>
           <tr><td>Mop Lifts for Carpet</td><td class="winner-cell">15mm auto-lift</td><td>12mm auto-lift</td><td>10mm auto-lift</td><td>10mm auto-lift</td></tr>
           <tr><td>Obstacle Avoidance</td><td>AIVI 3D — camera + structured light</td><td>Camera + AI detection</td><td class="winner-cell">Reactive AI — camera + structured light + cross-projection</td><td>OmniDirt — structured light + RGB camera</td></tr>
           <tr><td>Navigation</td><td>LiDAR + camera</td><td>LiDAR + camera</td><td>LiDAR + camera + structured light</td><td class="winner-cell">LiDAR + RGB + structured light</td></tr>
-          <tr><td>Unique Feature</td><td>Self-cleaning roller mop mid-run</td><td>HydroJet — best mopping tested</td><td>Self-lifting chassis — 40mm thresholds</td><td class="winner-cell">MopExtend™ — edge-to-edge reach</td></tr>
-          <tr><td>Edge Cleaning</td><td>Standard side brush</td><td>Standard side brush</td><td class="winner-cell">Extendable mop arm + side brush</td><td class="winner-cell">MopExtend™ swing-out arm</td></tr>
+          <tr><td>Unique Feature</td><td>Self-cleaning roller mop mid-run</td><td>HydroJet — best mopping tested</td><td>Self-lifting chassis — 40mm thresholds</td><td class="winner-cell">MopExtend&trade; — edge-to-edge reach</td></tr>
+          <tr><td>Edge Cleaning</td><td>Standard side brush</td><td>Standard side brush</td><td class="winner-cell">Extendable mop arm + side brush</td><td class="winner-cell">MopExtend&trade; swing-out arm</td></tr>
           <tr><td>Self-Emptying</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
           <tr><td>Mop Washing</td><td>Hot water</td><td>UniClean station</td><td>Hot water</td><td>Hot water</td></tr>
           <tr><td>Mop Drying</td><td>Hot air</td><td>Hot air</td><td>Hot air</td><td>Hot air</td></tr>
@@ -634,7 +651,7 @@
       <div class="decision-card x40 reveal">
         <h4>Dreame X40 Ultra — Premium Edge Cleaning</h4>
         <ul>
-          <li><strong>MopExtend™ arm</strong> reaches where others can't</li>
+          <li><strong>MopExtend&trade; arm</strong> reaches where others can't</li>
           <li>Strong obstacle AI with OmniDirt detection</li>
           <li>Slimmest profile at <strong>96mm</strong> — fits more furniture</li>
           <li>Canstar Innovation Award winner</li>
@@ -684,7 +701,7 @@
     <div class="verdict reveal">
       <div class="verdict-label">Our Recommendation</div>
       <h3>The <span>Ecovacs X8 Pro Omni</span> at $1,249</h3>
-      <p>Strongest overall package: top-tier suction, best-in-class obstacle avoidance, highest carpet lift, self-cleaning roller mop, and currently 50% off RRP. PCMag Australia's #1 pick for 2026. If your budget stretches to ~$2,000, the <strong>Dreame X40 Ultra</strong> adds MopExtend™ edge cleaning and the slimmest profile.</p>
+      <p>Strongest overall package: top-tier suction, best-in-class obstacle avoidance, highest carpet lift, self-cleaning roller mop, and currently 50% off RRP. PCMag Australia's #1 pick for 2026. If your budget stretches to ~$2,000, the <strong>Dreame X40 Ultra</strong> adds MopExtend&trade; edge cleaning and the slimmest profile.</p>
       <div class="alt-options">
         <div class="alt-option">Mopping priority? <strong>Eufy S1 Pro — $999</strong></div>
         <div class="alt-option">Thresholds? <strong>Roborock Qrevo Curv — $1,499</strong></div>
