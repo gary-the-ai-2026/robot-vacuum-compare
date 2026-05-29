@@ -3,208 +3,714 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Robot Vacuum & Mop Comparison — June 2026</title>
+<title>Robot Vacuum &amp; Mop Comparison — June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d1117;
-    --surface: #161b22;
-    --border: #30363d;
-    --text: #e6edf3;
-    --muted: #8b949e;
-    --accent: #58a6ff;
-    --green: #3fb950;
-    --orange: #d2991d;
-    --red: #f85149;
-    --x8: #58a6ff;
-    --s1: #3fb950;
-    --curv: #d2991d;
+    --bg: #09090d;
+    --bg-alt: #0e0e15;
+    --surface: #13131f;
+    --surface-hover: #1a1a2a;
+    --border: #1e1e30;
+    --border-light: #2a2a3d;
+    --text: #e4e4ec;
+    --text-secondary: #9d9db5;
+    --text-muted: #6b6b82;
+    --accent: #f0a030;
+    --accent-glow: rgba(240,160,48,0.15);
+    --blue: #4dabf7;
+    --blue-glow: rgba(77,171,247,0.12);
+    --green: #51cf66;
+    --green-glow: rgba(81,207,102,0.12);
+    --amber: #f08c00;
+    --amber-glow: rgba(240,140,0,0.12);
+    --winner: #40c057;
+    --card-radius: 20px;
+    --section-gap: 100px;
+    --max-width: 1240px;
   }
+
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-  
-  /* Hero */
-  .hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(180deg, #1a1f2e 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
-  .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
-  .hero .subtitle { font-size: 1.2rem; color: var(--muted); max-width: 600px; margin: 0 auto 8px; }
-  .hero .date { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
-  .hero .badge { display: inline-block; background: #1f2937; border: 1px solid var(--border); border-radius: 20px; padding: 6px 16px; font-size: 0.85rem; margin: 4px; color: var(--muted); }
-  
-  /* Cards */
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-  .section { padding: 60px 0; }
-  .section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 24px; text-align: center; }
-  
-  /* Three-card layout */
-  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-  .card-header { padding: 28px 24px 20px; text-align: center; border-bottom: 1px solid var(--border); }
-  .card-header .brand { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 4px; }
-  .card-header h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
-  .card-header .price { font-size: 2rem; font-weight: 800; margin-top: 12px; }
-  .card-header .was { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; }
-  .card-header .savings { font-size: 0.8rem; color: var(--green); margin-top: 2px; }
-  .card-body { padding: 20px 24px; }
-  .card-body .spec { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-  .card-body .spec:last-child { border-bottom: none; }
-  .card-body .spec .label { color: var(--muted); }
-  .card-body .spec .value { font-weight: 600; text-align: right; }
-  .card-footer { padding: 16px 24px 24px; text-align: center; }
-  .card-footer .verdict { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
-  .card-footer .tagline { font-weight: 600; font-size: 1.05rem; }
-  .card-footer .retailers { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
-  
-  /* Color accents */
-  .card.x8 { border-top: 4px solid var(--x8); }
-  .card.x8 .price { color: var(--x8); }
-  .card.s1 { border-top: 4px solid var(--s1); }
-  .card.s1 .price { color: var(--s1); }
-  .card.curv { border-top: 4px solid var(--orange); }
-  .card.curv .price { color: var(--orange); }
-  
-  /* Comparison Table */
-  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-  table { width: 100%; border-collapse: collapse; min-width: 700px; }
-  thead th { background: var(--surface); padding: 16px 20px; text-align: left; font-weight: 700; font-size: 0.95rem; border-bottom: 2px solid var(--border); }
-  thead th:first-child { color: var(--muted); width: 200px; }
-  tbody td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── Scroll-driven reveals ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Container ── */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ */
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 120px 20px 100px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 900px;
+    background: radial-gradient(ellipse at center, rgba(77,171,247,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    border: 1px solid var(--border-light);
+    border-radius: 100px;
+    padding: 8px 20px;
+    background: rgba(255,255,255,0.02);
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero .subtitle {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-meta {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .hero-stat .label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION HEADERS
+     ═══════════════════════════════════════════ */
+  .section {
+    padding: var(--section-gap) 0;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-header .kicker {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .section-header p {
+    color: var(--text-secondary);
+    max-width: 540px;
+    margin: 12px auto 0;
+    font-size: 0.95rem;
+  }
+
+  /* ═══════════════════════════════════════════
+     PRODUCT CARDS
+     ═══════════════════════════════════════════ */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .card.x8:hover { border-color: rgba(77,171,247,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px var(--blue-glow); }
+  .card.s1:hover { border-color: rgba(81,207,102,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px var(--green-glow); }
+  .card.curv:hover { border-color: rgba(240,140,0,0.3); box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 80px var(--amber-glow); }
+
+  .card-top {
+    padding: 32px 28px 24px;
+    text-align: center;
+    position: relative;
+  }
+  .card-top .brand {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .card-top h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+  .card-top .price-block {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .card-top .price {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .card.x8 .price { color: var(--blue); }
+  .card.s1 .price { color: var(--green); }
+  .card.curv .price { color: var(--amber); }
+
+  .card-top .was {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    margin-top: 4px;
+  }
+  .card-top .discount {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--winner);
+    border-radius: 6px;
+    padding: 3px 10px;
+    margin-top: 8px;
+  }
+
+  .card-body {
+    padding: 0 28px 20px;
+  }
+  .card-body .spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 0.88rem;
+  }
+  .card-body .spec-row:last-child { border-bottom: none; }
+  .card-body .spec-row .spec-label { color: var(--text-muted); font-size: 0.8rem; }
+  .card-body .spec-row .spec-value { font-weight: 600; text-align: right; }
+  .card-body .spec-row .spec-value.best { color: var(--winner); }
+
+  .card-footer {
+    padding: 16px 28px 28px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .card-footer .expert {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+  .card-footer .tagline {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .card-footer .stores {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* ── Recommended badge ── */
+  .card.recommended {
+    border-color: rgba(240,160,48,0.4);
+  }
+  .card.recommended::before {
+    content: 'Our Pick';
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--accent);
+    color: #000;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  /* ═══════════════════════════════════════════
+     COMPARISON TABLE
+     ═══════════════════════════════════════════ */
+  .table-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+  }
+  thead th {
+    background: rgba(0,0,0,0.25);
+    padding: 18px 24px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-light);
+    color: var(--text);
+  }
+  thead th:first-child {
+    color: var(--text-muted);
+    width: 220px;
+    font-weight: 500;
+  }
+  tbody td {
+    padding: 14px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    font-size: 0.88rem;
+  }
   tbody tr:last-child td { border-bottom: none; }
-  tbody tr:hover td { background: rgba(255,255,255,0.02); }
-  .highlight { color: var(--green); font-weight: 600; }
-  
-  /* Obstacle Avoidance */
-  .avoid-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
-  .avoid-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-  .avoid-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
-  .avoid-card p { font-size: 0.9rem; color: var(--text); margin-bottom: 12px; }
-  .avoid-card .rating { font-size: 1.5rem; }
-  
-  /* EOFY Section */
-  .eofy-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 24px; }
-  .eofy-box h3 { font-size: 1.1rem; margin-bottom: 16px; }
-  .eofy-box ul { list-style: none; }
-  .eofy-box li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-  .eofy-box li:last-child { border-bottom: none; }
-  .eofy-box li strong { color: var(--accent); }
-  
-  /* Footer */
-  footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
-  footer a { color: var(--accent); }
-  
-  /* Star ratings */
-  .stars { color: var(--orange); font-size: 1.1rem; letter-spacing: 2px; }
-  
-  /* Mobile responsive */
-  @media (max-width: 900px) {
-    .card-grid, .avoid-grid { grid-template-columns: 1fr; }
+  tbody tr:nth-child(even) td { background: rgba(255,255,255,0.012); }
+  tbody tr:hover td { background: rgba(255,255,255,0.03); }
+  .winner-cell {
+    color: var(--winner);
+    font-weight: 600;
+  }
+
+  /* ═══════════════════════════════════════════
+     OBSTACLE AVOIDANCE — LEGO TEST
+     ═══════════════════════════════════════════ */
+  .avoid-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .avoid-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: border-color 0.3s ease;
+  }
+  .avoid-card.x8:hover { border-color: rgba(77,171,247,0.3); }
+  .avoid-card.s1:hover { border-color: rgba(81,207,102,0.3); }
+  .avoid-card.curv:hover { border-color: rgba(240,140,0,0.3); }
+
+  .avoid-card .tech-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .avoid-card .stars {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .avoid-card.x8 .stars { color: var(--blue); }
+  .avoid-card.s1 .stars { color: var(--green); }
+  .avoid-card.curv .stars { color: var(--amber); }
+
+  .avoid-card .avoid-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .avoid-card .avoid-desc strong { color: var(--text); }
+  .avoid-card .caveat {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    border-left: 2px solid var(--border-light);
+  }
+
+  .honest-note {
+    text-align: center;
+    margin-top: 32px;
+    padding: 20px 28px;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .honest-note strong { color: var(--text-secondary); }
+
+  /* ═══════════════════════════════════════════
+     DECISION GUIDE
+     ═══════════════════════════════════════════ */
+  .decision-section {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .decision-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    padding: 32px 28px;
+  }
+  .decision-card h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  .decision-card.x8 h4 { color: var(--blue); }
+  .decision-card.s1 h4 { color: var(--green); }
+  .decision-card.curv h4 { color: var(--amber); }
+
+  .decision-card ul {
+    list-style: none;
+    font-size: 0.88rem;
+  }
+  .decision-card li {
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    color: var(--text-secondary);
+  }
+  .decision-card li:last-child { border-bottom: none; }
+  .decision-card li strong { color: var(--text); }
+
+  /* ═══════════════════════════════════════════
+     EOFY RETAILER SECTION
+     ═══════════════════════════════════════════ */
+  .retailer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .retailer-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .retailer-card h5 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .retailer-card .r-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px 0;
+    font-size: 0.83rem;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .retailer-card .r-item:last-child { border-bottom: none; }
+  .retailer-card .r-price { font-weight: 700; }
+  .retailer-card .r-note {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════════
+     VERDICT BANNER
+     ═══════════════════════════════════════════ */
+  .verdict {
+    margin-top: 40px;
+    padding: 36px 40px;
+    background: linear-gradient(135deg, rgba(240,160,48,0.08) 0%, rgba(240,160,48,0.02) 100%);
+    border: 1px solid rgba(240,160,48,0.25);
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .verdict::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(240,160,48,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .verdict .verdict-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .verdict h3 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    position: relative;
+  }
+  .verdict h3 span { color: var(--accent); }
+  .verdict p {
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0 auto;
+    font-size: 0.92rem;
+    line-height: 1.7;
+    position: relative;
+  }
+  .verdict .alt-options {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .verdict .alt-option {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .verdict .alt-option strong { color: var(--text-secondary); }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ */
+  footer {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+  footer .footer-row { margin-top: 6px; }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
+     ═══════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .card-grid, .avoid-grid, .decision-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .retailer-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 80px 16px 60px; }
     .hero h1 { font-size: 2rem; }
-    thead th:first-child { width: 150px; }
+    .hero-meta { gap: 20px; }
+    .retailer-grid { grid-template-columns: 1fr; }
+    .card-top .price { font-size: 2.4rem; }
+    .table-wrap { font-size: 0.8rem; }
+    .section { padding: 60px 0; }
+    .verdict { padding: 24px 20px; }
+    .verdict h3 { font-size: 1.3rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- Hero -->
+<!-- ═══════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════ -->
 <section class="hero">
-  <h1>Robot Vacuum & Mop Comparison</h1>
-  <p class="subtitle">Three premium 2-in-1 robot vacuums tested, compared, and priced for the Australian market.</p>
-  <div>
-    <span class="badge">Vacuum + Mop</span>
-    <span class="badge">AI Obstacle Avoidance</span>
-    <span class="badge">Carpet-Safe</span>
-    <span class="badge">Self-Cleaning Base</span>
-    <span class="badge">LiDAR Mapping</span>
+  <div class="hero-label">Research · June 2026</div>
+  <h1>Which robot vacuum<br>is <span>right for you?</span></h1>
+  <p class="subtitle">Three premium 2-in-1 robots compared head-to-head — obstacle avoidance, mopping, carpet handling, and Australian EOFY pricing.</p>
+  <div class="hero-meta">
+    <div class="hero-stat"><div class="num">$999–$1,499</div><div class="label">Price Range</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">Contenders</div></div>
+    <div class="hero-stat"><div class="num">18</div><div class="label">Features Compared</div></div>
+    <div class="hero-stat"><div class="num">5</div><div class="label">Review Sources</div></div>
   </div>
-  <p class="date">Research compiled June 2026 · Australian pricing · Prepared for EOFY sales</p>
 </section>
 
-<!-- Model Cards -->
+<!-- ═══════════════════════════════════════════
+     PRODUCT CARDS
+     ═══════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <h2>The Three Contenders</h2>
+    <div class="section-header reveal">
+      <div class="kicker">The Contenders</div>
+      <h2>Three models worth considering</h2>
+      <p>All vacuum, mop, self-clean, map your home, and dodge your kids' Lego. But each wins in a different area.</p>
+    </div>
+
     <div class="card-grid">
-      
-      <!-- Ecovacs X8 -->
-      <div class="card x8">
-        <div class="card-header">
+
+      <!-- ECOVACS X8 — Recommended -->
+      <div class="card x8 recommended reveal">
+        <div class="card-top">
           <div class="brand">Ecovacs</div>
           <h3>Deebot X8 Pro Omni</h3>
-          <div class="price">$1,249</div>
-          <div class="was">was $2,499</div>
-          <div class="savings">50% off — Best value right now</div>
+          <div class="price-block">
+            <div class="price">$1,249</div>
+            <div class="was">RRP $2,499</div>
+            <div class="discount">50% OFF</div>
+          </div>
         </div>
         <div class="card-body">
-          <div class="spec"><span class="label">Suction</span><span class="value">18,000 Pa</span></div>
-          <div class="spec"><span class="label">Mop Type</span><span class="value">Roller (self-cleans)</span></div>
-          <div class="spec"><span class="label">Obstacle AI</span><span class="value stars">★★★★★</span></div>
-          <div class="spec"><span class="label">Base Station</span><span class="value">Empty + Wash + Dry</span></div>
-          <div class="spec"><span class="label">Carpet Lift</span><span class="value">15mm auto-lift</span></div>
-          <div class="spec"><span class="label">Navigation</span><span class="value">LiDAR + Camera (AIVI 3D)</span></div>
+          <div class="spec-row"><span class="spec-label">Suction</span><span class="spec-value">18,000 Pa</span></div>
+          <div class="spec-row"><span class="spec-label">Mop</span><span class="spec-value">Self-cleaning roller</span></div>
+          <div class="spec-row"><span class="spec-label">Obstacle AI</span><span class="spec-value best">★★★★★</span></div>
+          <div class="spec-row"><span class="spec-label">Carpet lift</span><span class="spec-value best">15mm</span></div>
+          <div class="spec-row"><span class="spec-label">Base station</span><span class="spec-value">Empty · Wash · Dry</span></div>
+          <div class="spec-row"><span class="spec-label">Navigation</span><span class="spec-value">LiDAR + AIVI 3D</span></div>
         </div>
         <div class="card-footer">
-          <div class="verdict">PCMag Australia #1 Pick 2026</div>
-          <div class="tagline">🏆 Best All-Rounder</div>
-          <div class="retailers">JB Hi-Fi · The Good Guys</div>
+          <div class="expert">PCMag Australia #1 Pick 2026</div>
+          <div class="tagline">Best All-Rounder</div>
+          <div class="stores">JB Hi-Fi · The Good Guys</div>
         </div>
       </div>
-      
-      <!-- Eufy S1 Pro -->
-      <div class="card s1">
-        <div class="card-header">
+
+      <!-- EUFY S1 PRO -->
+      <div class="card s1 reveal">
+        <div class="card-top">
           <div class="brand">Eufy</div>
           <h3>S1 Pro</h3>
-          <div class="price">$999</div>
-          <div class="was">was $1,807</div>
-          <div class="savings">45% off — Most affordable</div>
+          <div class="price-block">
+            <div class="price">$999</div>
+            <div class="was">RRP $1,807</div>
+            <div class="discount">45% OFF</div>
+          </div>
         </div>
         <div class="card-body">
-          <div class="spec"><span class="label">Suction</span><span class="value">8,000 Pa</span></div>
-          <div class="spec"><span class="label">Mop Type</span><span class="value">HydroJet Roller</span></div>
-          <div class="spec"><span class="label">Obstacle AI</span><span class="value stars">★★★★</span></div>
-          <div class="spec"><span class="label">Base Station</span><span class="value">Empty + Wash + Dry</span></div>
-          <div class="spec"><span class="label">Carpet Lift</span><span class="value">12mm auto-lift</span></div>
-          <div class="spec"><span class="label">Navigation</span><span class="value">LiDAR + Camera</span></div>
+          <div class="spec-row"><span class="spec-label">Suction</span><span class="spec-value">8,000 Pa</span></div>
+          <div class="spec-row"><span class="spec-label">Mop</span><span class="spec-value best">HydroJet roller</span></div>
+          <div class="spec-row"><span class="spec-label">Obstacle AI</span><span class="spec-value">★★★★</span></div>
+          <div class="spec-row"><span class="spec-label">Carpet lift</span><span class="spec-value">12mm</span></div>
+          <div class="spec-row"><span class="spec-label">Base station</span><span class="spec-value">Empty · Wash · Dry</span></div>
+          <div class="spec-row"><span class="spec-label">Navigation</span><span class="spec-value">LiDAR + Camera</span></div>
         </div>
         <div class="card-footer">
-          <div class="verdict">ZDNET "Best Mop Feature"</div>
-          <div class="tagline">🧹 Best Mop</div>
-          <div class="retailers">Eufy AU · Amazon AU · Woolworths</div>
+          <div class="expert">ZDNET "Best Mop Feature"</div>
+          <div class="tagline">Best Mopping</div>
+          <div class="stores">Eufy AU · Amazon · Woolworths</div>
         </div>
       </div>
-      
-      <!-- Roborock Qrevo Curv -->
-      <div class="card curv">
-        <div class="card-header">
+
+      <!-- ROBOROCK QREVO CURV -->
+      <div class="card curv reveal">
+        <div class="card-top">
           <div class="brand">Roborock</div>
           <h3>Qrevo Curv</h3>
-          <div class="price">$1,499</div>
-          <div class="was">was $2,799</div>
-          <div class="savings">46% off — Premium features</div>
+          <div class="price-block">
+            <div class="price">$1,499</div>
+            <div class="was">RRP $2,799</div>
+            <div class="discount">46% OFF</div>
+          </div>
         </div>
         <div class="card-body">
-          <div class="spec"><span class="label">Suction</span><span class="value">18,500 Pa</span></div>
-          <div class="spec"><span class="label">Mop Type</span><span class="value">Dual spinning (extendable)</span></div>
-          <div class="spec"><span class="label">Obstacle AI</span><span class="value stars">★★★★★</span></div>
-          <div class="spec"><span class="label">Base Station</span><span class="value">Empty + Wash + Dry</span></div>
-          <div class="spec"><span class="label">Carpet Lift</span><span class="value">10mm auto-lift</span></div>
-          <div class="spec"><span class="label">Navigation</span><span class="value">LiDAR + Camera + Structured Light</span></div>
+          <div class="spec-row"><span class="spec-label">Suction</span><span class="spec-value best">18,500 Pa</span></div>
+          <div class="spec-row"><span class="spec-label">Mop</span><span class="spec-value">Dual spinning</span></div>
+          <div class="spec-row"><span class="spec-label">Obstacle AI</span><span class="spec-value best">★★★★★</span></div>
+          <div class="spec-row"><span class="spec-label">Carpet lift</span><span class="spec-value">10mm</span></div>
+          <div class="spec-row"><span class="spec-label">Base station</span><span class="spec-value">Empty · Wash · Dry</span></div>
+          <div class="spec-row"><span class="spec-label">Navigation</span><span class="spec-value best">LiDAR + Structured Light</span></div>
         </div>
         <div class="card-footer">
-          <div class="verdict">PCMag "Best Multi-Level Floors"</div>
-          <div class="tagline">🧭 Best Navigator</div>
-          <div class="retailers">Roborock ANZ · JB Hi-Fi</div>
+          <div class="expert">PCMag "Best Multi-Level Floors"</div>
+          <div class="tagline">Best Navigator</div>
+          <div class="stores">Roborock ANZ · JB Hi-Fi</div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>
 
-<!-- Full Comparison Table -->
-<section class="section" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<!-- ═══════════════════════════════════════════
+     FULL COMPARISON TABLE
+     ═══════════════════════════════════════════ -->
+<section class="section table-section">
   <div class="container">
-    <h2>Detailed Comparison</h2>
-    <div class="table-wrap">
+    <div class="section-header reveal">
+      <div class="kicker">Side by Side</div>
+      <h2>Every spec, compared</h2>
+      <p>Eighteen features across all three models. Winners highlighted.</p>
+    </div>
+
+    <div class="table-wrap reveal">
       <table>
         <thead>
           <tr>
@@ -215,163 +721,191 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Price (AUD)</td><td class="highlight">$1,249</td><td class="highlight">$999</td><td>$1,499</td></tr>
+          <tr><td>Price (AUD)</td><td class="winner-cell">$1,249</td><td class="winner-cell">$999</td><td>$1,499</td></tr>
           <tr><td>RRP</td><td>$2,499</td><td>$1,807</td><td>$2,799</td></tr>
-          <tr><td>Suction Power</td><td>18,000 Pa</td><td>8,000 Pa</td><td class="highlight">18,500 Pa</td></tr>
-          <tr><td>Mop Type</td><td>Roller mop (self-cleans during run)</td><td class="highlight">HydroJet roller mop (best-in-class)</td><td>Dual spinning pads (extendable arm)</td></tr>
-          <tr><td>Mop Lifts for Carpet</td><td class="highlight">✅ 15mm auto-lift</td><td>✅ 12mm auto-lift</td><td>✅ 10mm auto-lift</td></tr>
-          <tr><td>Obstacle Avoidance</td><td>AIVI 3D (camera + structured light)</td><td>Camera + AI detection</td><td class="highlight">Reactive AI (camera + structured light + cross-projection)</td></tr>
-          <tr><td>Navigation</td><td>LiDAR + camera</td><td>LiDAR + camera</td><td class="highlight">LiDAR + camera + structured light</td></tr>
-          <tr><td>Unique Feature</td><td>Self-cleaning roller mop mid-run</td><td class="highlight">HydroJet rolling mop — best mopping tested</td><td class="highlight">Self-lifting chassis (40mm threshold crossing)</td></tr>
-          <tr><td>Edge Cleaning</td><td>Standard side brush</td><td>Standard side brush</td><td class="highlight">Extendable mop arm + side brush</td></tr>
-          <tr><td>Self-Emptying</td><td>✅</td><td>✅</td><td>✅</td></tr>
-          <tr><td>Mop Washing</td><td>✅ Hot water</td><td>✅ UniClean station</td><td>✅ Hot water</td></tr>
-          <tr><td>Mop Drying</td><td>✅ Hot air</td><td>✅ Hot air</td><td>✅ Hot air</td></tr>
-          <tr><td>Multi-Floor Maps</td><td>✅ Multiple maps</td><td>✅ Multiple maps</td><td class="highlight">✅ Multiple maps + threshold crossing</td></tr>
-          <tr><td>Voice Control</td><td>Alexa, Google, Siri</td><td>Alexa, Google</td><td>Alexa, Google, Siri</td></tr>
+          <tr><td>Suction Power</td><td>18,000 Pa</td><td>8,000 Pa</td><td class="winner-cell">18,500 Pa</td></tr>
+          <tr><td>Mop Type</td><td>Roller mop — self-cleans mid-run</td><td class="winner-cell">HydroJet roller — best mopping tested</td><td>Dual spinning pads — extendable arm</td></tr>
+          <tr><td>Mop Lifts for Carpet</td><td class="winner-cell">15mm auto-lift</td><td>12mm auto-lift</td><td>10mm auto-lift</td></tr>
+          <tr><td>Obstacle Avoidance</td><td>AIVI 3D — camera + structured light</td><td>Camera + AI detection</td><td class="winner-cell">Reactive AI — camera + structured light + cross-projection</td></tr>
+          <tr><td>Navigation</td><td>LiDAR + camera</td><td>LiDAR + camera</td><td class="winner-cell">LiDAR + camera + structured light</td></tr>
+          <tr><td>Unique Feature</td><td>Self-cleaning roller mop mid-run</td><td class="winner-cell">HydroJet — best mopping tested</td><td class="winner-cell">Self-lifting chassis — climbs 40mm thresholds</td></tr>
+          <tr><td>Edge Cleaning</td><td>Standard side brush</td><td>Standard side brush</td><td class="winner-cell">Extendable mop arm + side brush</td></tr>
+          <tr><td>Self-Emptying</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Mop Washing</td><td>Hot water</td><td>UniClean station</td><td>Hot water</td></tr>
+          <tr><td>Mop Drying</td><td>Hot air</td><td>Hot air</td><td>Hot air</td></tr>
+          <tr><td>Multi-Floor Maps</td><td>Multiple maps</td><td>Multiple maps</td><td class="winner-cell">Multiple maps + threshold crossing</td></tr>
+          <tr><td>Voice Control</td><td>Alexa · Google · Siri</td><td>Alexa · Google</td><td>Alexa · Google · Siri</td></tr>
           <tr><td>Battery Life</td><td>~180 min</td><td>~180 min</td><td>~180 min</td></tr>
-          <tr><td>Dust Bag Capacity</td><td>~75 days</td><td>~60 days</td><td>~60 days</td></tr>
+          <tr><td>Dust Bag Capacity</td><td class="winner-cell">~75 days</td><td>~60 days</td><td>~60 days</td></tr>
           <tr><td>Height</td><td>103 mm</td><td>97 mm</td><td>103 mm</td></tr>
-          <tr><td>Expert Rating</td><td class="highlight">PCMag #1 · 4.3★ (JB)</td><td>ZDNET Best Mop · 4.4★</td><td>PCMag Best Multi-Level · 4.2★ (JB)</td></tr>
+          <tr><td>Expert Rating</td><td>PCMag #1 · 4.3★ (JB)</td><td>ZDNET Best Mop · 4.4★</td><td>PCMag Best Multi-Level · 4.2★ (JB)</td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </section>
 
-<!-- Obstacle Avoidance Deep Dive -->
+<!-- ═══════════════════════════════════════════
+     OBSTACLE AVOIDANCE — THE LEGO TEST
+     ═══════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <h2>Obstacle Avoidance — The Lego Test</h2>
-    <p style="text-align:center; color: var(--muted); max-width: 700px; margin: 0 auto 32px;">With two young children and Lego-sized toys on the floor, obstacle avoidance is the single most critical feature. Here's how each model handles it.</p>
-    
+    <div class="section-header reveal">
+      <div class="kicker">The Lego Test</div>
+      <h2>Obstacle avoidance, ranked</h2>
+      <p>With young kids and small toys on the floor, this is the feature that matters most day to day.</p>
+    </div>
+
     <div class="avoid-grid">
-      <div class="avoid-card" style="border-top: 4px solid var(--x8);">
-        <h4>Ecovacs X8 Pro Omni</h4>
-        <div class="rating">★★★★★</div>
-        <p><strong>AIVI 3D</strong> uses a front-facing camera combined with structured light to identify and avoid objects as small as 5cm. Recognises toys, cords, shoes, and pet waste. Takes photos of obstacles for review in the app. Among the best in class for avoidance.</p>
-        <p style="font-size:0.8rem; color: var(--muted); margin-top:12px;">⚠️ Still may miss very small items (cat-toy size)</p>
+      <div class="avoid-card x8 reveal">
+        <div class="tech-label">AIVI 3D</div>
+        <div class="stars">★★★★★</div>
+        <p class="avoid-desc"><strong>Camera + structured light.</strong> Identifies and avoids objects down to ~5cm. Recognises toys, cords, shoes, and pet waste. Photos of obstacles available in-app for review.</p>
+        <div class="caveat">Still misses very small items (cat-toy size).</div>
       </div>
-      
-      <div class="avoid-card" style="border-top: 4px solid var(--s1);">
-        <h4>Eufy S1 Pro</h4>
-        <div class="rating">★★★★</div>
-        <p><strong>Camera-based AI</strong> with obstacle recognition. Reddit users report excellent cord avoidance and decent toy avoidance. Strong for larger obstacles but less refined than the X8 or Curv for very small items. The Eufy X10 Pro Omni variant is specifically praised for cord avoidance.</p>
-        <p style="font-size:0.8rem; color: var(--muted); margin-top:12px;">⚠️ Camera-only system — struggles more in low light</p>
+
+      <div class="avoid-card s1 reveal">
+        <div class="tech-label">Camera AI</div>
+        <div class="stars">★★★★</div>
+        <p class="avoid-desc"><strong>Camera-based detection.</strong> Reddit users report excellent cord avoidance and solid toy avoidance. Strong for larger obstacles, less refined for very small items.</p>
+        <div class="caveat">Camera-only — struggles in low light. Less precise than structured-light systems.</div>
       </div>
-      
-      <div class="avoid-card" style="border-top: 4px solid var(--orange);">
-        <h4>Roborock Qrevo Curv</h4>
-        <div class="rating">★★★★★</div>
-        <p><strong>Reactive AI</strong> with camera, structured light, and cross-projection. The unique self-lifting chassis <em>physically climbs over</em> some obstacles rather than just avoiding them — particularly effective with cords and medium toys. Industry-leading edge case handling.</p>
-        <p style="font-size:0.8rem; color: var(--muted); margin-top:12px;">⚠️ Still cannot identify/avoid items under ~5cm reliably</p>
+
+      <div class="avoid-card curv reveal">
+        <div class="tech-label">Reactive AI</div>
+        <div class="stars">★★★★★</div>
+        <p class="avoid-desc"><strong>Camera + structured light + cross-projection.</strong> The unique lifting chassis can <em>climb over</em> some obstacles rather than just avoiding them. Industry-leading edge case handling.</p>
+        <div class="caveat">Cannot reliably identify items under ~5cm.</div>
       </div>
     </div>
-    
-    <p style="text-align:center; color: var(--muted); font-size:0.8rem; margin-top: 24px;"><strong>Honest advice:</strong> No robot vacuum can reliably avoid Lego bricks or very small toys. You'll still want to do a quick floor tidy before scheduled runs. These models are the best available at trying.</p>
+
+    <div class="honest-note reveal">
+      <strong>Honest advice:</strong> No robot vacuum can reliably dodge every Lego brick. A quick floor tidy before a scheduled run is still the best defence. These three are the best available at trying.
+    </div>
   </div>
 </section>
 
-<!-- Which One? -->
-<section class="section" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+<!-- ═══════════════════════════════════════════
+     DECISION GUIDE
+     ═══════════════════════════════════════════ -->
+<section class="section decision-section">
   <div class="container">
-    <h2>Which One Should You Choose?</h2>
-    <div class="card-grid" style="margin-top: 24px;">
-      
-      <div class="card x8" style="padding: 24px;">
-        <h4 style="color: var(--x8); margin-bottom: 12px;">Choose the Ecovacs X8 Pro Omni if…</h4>
-        <ul style="list-style: none; font-size: 0.9rem;">
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You want the <strong>best all-rounder</strong> as rated by PCMag</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Self-cleaning roller mop <strong>mid-run</strong> matters (no spreading dirt)</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You want the <strong>best value</strong> at current EOFY pricing (50% off)</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Mix of carpet and hard floors with <strong>high mop lift</strong> (15mm)</li>
-          <li style="padding: 6px 0;">✅ You prioritise strong AI obstacle avoidance</li>
+    <div class="section-header reveal">
+      <div class="kicker">Decision Guide</div>
+      <h2>Which one is yours?</h2>
+    </div>
+
+    <div class="decision-grid">
+      <div class="decision-card x8 reveal">
+        <h4>Pick the Ecovacs X8 Pro Omni if…</h4>
+        <ul>
+          <li>You want the <strong>strongest all-rounder</strong> as rated by PCMag Australia</li>
+          <li>A self-cleaning roller mop <strong>mid-run</strong> matters (no spreading dirty water)</li>
+          <li>You want the <strong>best value</strong> at current EOFY pricing — 50% off RRP</li>
+          <li>You have a <strong>mix of carpet and hard floors</strong> (highest mop lift at 15mm)</li>
+          <li>Strong AI obstacle avoidance is non-negotiable</li>
         </ul>
       </div>
-      
-      <div class="card s1" style="padding: 24px;">
-        <h4 style="color: var(--s1); margin-bottom: 12px;">Choose the Eufy S1 Pro if…</h4>
-        <ul style="list-style: none; font-size: 0.9rem;">
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ <strong>Mopping</strong> is your #1 priority — the HydroJet roller is best-in-class</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Budget-conscious — <strong>lowest price</strong> at $999</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Brand familiarity (Amy's dad already owns and likes Eufy)</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Mostly hard floors with some carpet</li>
-          <li style="padding: 6px 0;">✅ You value the Eufy app experience and ecosystem</li>
+
+      <div class="decision-card s1 reveal">
+        <h4>Pick the Eufy S1 Pro if…</h4>
+        <ul>
+          <li><strong>Mopping performance</strong> is your #1 priority — HydroJet is best-in-class</li>
+          <li>Budget matters — <strong>lowest price</strong> at $999</li>
+          <li>Brand familiarity counts (Amy's dad already owns and likes Eufy)</li>
+          <li>Your home is <strong>mostly hard floors</strong> with some carpet</li>
+          <li>You value the Eufy app ecosystem and experience</li>
         </ul>
       </div>
-      
-      <div class="card curv" style="padding: 24px;">
-        <h4 style="color: var(--orange); margin-bottom: 12px;">Choose the Roborock Qrevo Curv if…</h4>
-        <ul style="list-style: none; font-size: 0.9rem;">
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You have <strong>thresholds or multi-level floors</strong> — lifting chassis is unique</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ <strong>Edge and corner cleaning</strong> matters (extendable arm is the best tested)</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You want the <strong>highest suction</strong> (18,500 Pa)</li>
-          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Premium features justify the extra $250 over the X8</li>
-          <li style="padding: 6px 0;">✅ You like the curved design and unique aesthetic</li>
+
+      <div class="decision-card curv reveal">
+        <h4>Pick the Roborock Qrevo Curv if…</h4>
+        <ul>
+          <li>You have <strong>thresholds or multi-level floors</strong> — the lifting chassis is unique</li>
+          <li><strong>Edge and corner cleaning</strong> matters (extendable arm is best tested)</li>
+          <li>You want the <strong>highest suction</strong> available (18,500 Pa)</li>
+          <li>Premium navigation features justify the $250 premium over the X8</li>
+          <li>You love the curved aesthetic and Roborock build quality</li>
         </ul>
       </div>
-      
     </div>
   </div>
 </section>
 
-<!-- EOFY Strategy -->
+<!-- ═══════════════════════════════════════════
+     EOFY BUYING STRATEGY
+     ═══════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <h2>EOFY Buying Strategy</h2>
-    <p style="text-align:center; color: var(--muted); margin-bottom: 32px;">Australian EOFY sales typically begin mid-June and peak June 30. Here's where to watch:</p>
-    <div class="eofy-box">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
-        <div>
-          <h3>🏬 JB Hi-Fi</h3>
-          <ul>
-            <li>X8 Pro Omni: <strong>$1,249</strong> (50% off)</li>
-            <li>Qrevo Curv (white): $1,438*</li>
-            <li>Qrevo Curv 2 Flow: $2,499</li>
-            <li style="color: var(--muted); font-size:0.8rem;">*clearance, out of stock<br>Best EOFY track record</li>
-          </ul>
-        </div>
-        <div>
-          <h3>🏬 The Good Guys</h3>
-          <ul>
-            <li>X8 Pro Omni: <strong>$1,249</strong></li>
-            <li style="color: var(--muted); font-size:0.8rem;">Often runs "beat by 20%"<br>promotions during EOFY</li>
-          </ul>
-        </div>
-        <div>
-          <h3>📦 Amazon AU</h3>
-          <ul>
-            <li>Eufy S1 Pro: <strong>$999</strong></li>
-            <li style="color: var(--muted); font-size:0.8rem;">Watch for Prime Day crossover<br>with EOFY timing</li>
-          </ul>
-        </div>
-        <div>
-          <h3>🏭 Direct Stores</h3>
-          <ul>
-            <li>Eufy AU: S1 Pro <strong>$999</strong></li>
-            <li>Roborock ANZ: Curv <strong>$1,499</strong></li>
-            <li style="color: var(--muted); font-size:0.8rem;">Direct stores often undercut<br>retailers during EOFY</li>
-          </ul>
-        </div>
+    <div class="section-header reveal">
+      <div class="kicker">EOFY Strategy</div>
+      <h2>Where to buy</h2>
+      <p>Australian EOFY sales peak June 30. Current prices as of late May — these may drop further.</p>
+    </div>
+
+    <div class="retailer-grid reveal">
+      <div class="retailer-card">
+        <h5>🏬 JB Hi-Fi</h5>
+        <div class="r-item"><span>X8 Pro Omni</span><span class="r-price">$1,249</span></div>
+        <div class="r-item"><span>Qrevo Curv</span><span class="r-price">$1,438*</span></div>
+        <div class="r-item"><span>Curv 2 Flow</span><span class="r-price">$2,499</span></div>
+        <div class="r-note">*White, clearance. Strongest EOFY track record.</div>
+      </div>
+
+      <div class="retailer-card">
+        <h5>🏬 The Good Guys</h5>
+        <div class="r-item"><span>X8 Pro Omni</span><span class="r-price">$1,249</span></div>
+        <div class="r-note">Often runs "beat by 20%" during EOFY. Worth watching.</div>
+      </div>
+
+      <div class="retailer-card">
+        <h5>📦 Amazon AU</h5>
+        <div class="r-item"><span>Eufy S1 Pro</span><span class="r-price">$999</span></div>
+        <div class="r-note">Watch for Prime Day crossover with EOFY timing.</div>
+      </div>
+
+      <div class="retailer-card">
+        <h5>🏭 Direct Stores</h5>
+        <div class="r-item"><span>Eufy S1 Pro</span><span class="r-price">$999</span></div>
+        <div class="r-item"><span>Qrevo Curv</span><span class="r-price">$1,499</span></div>
+        <div class="r-note">Direct stores often undercut retailers during EOFY.</div>
       </div>
     </div>
-    
-    <div style="margin-top: 32px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center;">
-      <p style="font-size: 0.95rem; color: var(--muted);">
-        <strong style="color: var(--text);">Bottom line:</strong> 
-        The <span style="color: var(--x8); font-weight: 600;">Ecovacs X8 Pro Omni at $1,249</span> represents the strongest overall package for your needs. 
-        If mopping matters more, save $250 with the <span style="color: var(--s1); font-weight: 600;">Eufy S1 Pro at $999</span>. 
-        If you have tricky thresholds or want the absolute best edge cleaning, the <span style="color: var(--orange); font-weight: 600;">Roborock Qrevo Curv at $1,499</span> is worth the stretch.
-      </p>
+
+    <!-- VERDICT -->
+    <div class="verdict reveal">
+      <div class="verdict-label">Our Recommendation</div>
+      <h3>The <span>Ecovacs X8 Pro Omni</span> at $1,249</h3>
+      <p>It's the strongest overall package: top-tier suction, best-in-class obstacle avoidance, highest carpet lift, self-cleaning roller mop, and currently 50% off RRP. PCMag Australia's #1 pick for 2026.</p>
+      <div class="alt-options">
+        <div class="alt-option">Mopping matters more? <strong>Eufy S1 Pro — $999</strong></div>
+        <div class="alt-option">Tricky thresholds? <strong>Roborock Qrevo Curv — $1,499</strong></div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════ -->
 <footer>
   <p>Research compiled by <a href="https://github.com/gary-the-ai-2026">Gary</a> — personal AI assistant to Josh Hancock.</p>
-  <p>Sources: PCMag Australia (March 2026), ZDNET (December 2025), The Hook Up YouTube, Reddit r/RobotVacuums, Google Shopping Australia.</p>
-  <p style="margin-top: 8px;">Prices as of May 2026. Subject to change during EOFY sales. This is not sponsored content.</p>
+  <p class="footer-row">Sources: PCMag Australia (March 2026), ZDNET (December 2025), The Hook Up YouTube, Reddit r/RobotVacuums, Google Shopping Australia.</p>
+  <p class="footer-row">Prices as of late May 2026. Subject to change during EOFY sales. Not sponsored.</p>
 </footer>
+
+<!-- ── Scroll reveal ── -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
