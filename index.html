@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Vacuum & Mop Comparison — June 2026</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d2991d;
+    --red: #f85149;
+    --x8: #58a6ff;
+    --s1: #3fb950;
+    --curv: #d2991d;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  
+  /* Hero */
+  .hero { text-align: center; padding: 80px 20px 60px; background: linear-gradient(180deg, #1a1f2e 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
+  .hero h1 { font-size: 2.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 12px; }
+  .hero .subtitle { font-size: 1.2rem; color: var(--muted); max-width: 600px; margin: 0 auto 8px; }
+  .hero .date { font-size: 0.85rem; color: var(--muted); margin-top: 16px; }
+  .hero .badge { display: inline-block; background: #1f2937; border: 1px solid var(--border); border-radius: 20px; padding: 6px 16px; font-size: 0.85rem; margin: 4px; color: var(--muted); }
+  
+  /* Cards */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 60px 0; }
+  .section h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 24px; text-align: center; }
+  
+  /* Three-card layout */
+  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+  .card-header { padding: 28px 24px 20px; text-align: center; border-bottom: 1px solid var(--border); }
+  .card-header .brand { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 4px; }
+  .card-header h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.3; }
+  .card-header .price { font-size: 2rem; font-weight: 800; margin-top: 12px; }
+  .card-header .was { font-size: 0.85rem; color: var(--muted); text-decoration: line-through; }
+  .card-header .savings { font-size: 0.8rem; color: var(--green); margin-top: 2px; }
+  .card-body { padding: 20px 24px; }
+  .card-body .spec { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .card-body .spec:last-child { border-bottom: none; }
+  .card-body .spec .label { color: var(--muted); }
+  .card-body .spec .value { font-weight: 600; text-align: right; }
+  .card-footer { padding: 16px 24px 24px; text-align: center; }
+  .card-footer .verdict { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+  .card-footer .tagline { font-weight: 600; font-size: 1.05rem; }
+  .card-footer .retailers { font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+  
+  /* Color accents */
+  .card.x8 { border-top: 4px solid var(--x8); }
+  .card.x8 .price { color: var(--x8); }
+  .card.s1 { border-top: 4px solid var(--s1); }
+  .card.s1 .price { color: var(--s1); }
+  .card.curv { border-top: 4px solid var(--orange); }
+  .card.curv .price { color: var(--orange); }
+  
+  /* Comparison Table */
+  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  thead th { background: var(--surface); padding: 16px 20px; text-align: left; font-weight: 700; font-size: 0.95rem; border-bottom: 2px solid var(--border); }
+  thead th:first-child { color: var(--muted); width: 200px; }
+  tbody td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.02); }
+  .highlight { color: var(--green); font-weight: 600; }
+  
+  /* Obstacle Avoidance */
+  .avoid-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
+  .avoid-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .avoid-card h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+  .avoid-card p { font-size: 0.9rem; color: var(--text); margin-bottom: 12px; }
+  .avoid-card .rating { font-size: 1.5rem; }
+  
+  /* EOFY Section */
+  .eofy-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-top: 24px; }
+  .eofy-box h3 { font-size: 1.1rem; margin-bottom: 16px; }
+  .eofy-box ul { list-style: none; }
+  .eofy-box li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+  .eofy-box li:last-child { border-bottom: none; }
+  .eofy-box li strong { color: var(--accent); }
+  
+  /* Footer */
+  footer { text-align: center; padding: 40px 20px; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 40px; }
+  footer a { color: var(--accent); }
+  
+  /* Star ratings */
+  .stars { color: var(--orange); font-size: 1.1rem; letter-spacing: 2px; }
+  
+  /* Mobile responsive */
+  @media (max-width: 900px) {
+    .card-grid, .avoid-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2rem; }
+    thead th:first-child { width: 150px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>Robot Vacuum & Mop Comparison</h1>
+  <p class="subtitle">Three premium 2-in-1 robot vacuums tested, compared, and priced for the Australian market.</p>
+  <div>
+    <span class="badge">Vacuum + Mop</span>
+    <span class="badge">AI Obstacle Avoidance</span>
+    <span class="badge">Carpet-Safe</span>
+    <span class="badge">Self-Cleaning Base</span>
+    <span class="badge">LiDAR Mapping</span>
+  </div>
+  <p class="date">Research compiled June 2026 · Australian pricing · Prepared for EOFY sales</p>
+</section>
+
+<!-- Model Cards -->
+<section class="section">
+  <div class="container">
+    <h2>The Three Contenders</h2>
+    <div class="card-grid">
+      
+      <!-- Ecovacs X8 -->
+      <div class="card x8">
+        <div class="card-header">
+          <div class="brand">Ecovacs</div>
+          <h3>Deebot X8 Pro Omni</h3>
+          <div class="price">$1,249</div>
+          <div class="was">was $2,499</div>
+          <div class="savings">50% off — Best value right now</div>
+        </div>
+        <div class="card-body">
+          <div class="spec"><span class="label">Suction</span><span class="value">18,000 Pa</span></div>
+          <div class="spec"><span class="label">Mop Type</span><span class="value">Roller (self-cleans)</span></div>
+          <div class="spec"><span class="label">Obstacle AI</span><span class="value stars">★★★★★</span></div>
+          <div class="spec"><span class="label">Base Station</span><span class="value">Empty + Wash + Dry</span></div>
+          <div class="spec"><span class="label">Carpet Lift</span><span class="value">15mm auto-lift</span></div>
+          <div class="spec"><span class="label">Navigation</span><span class="value">LiDAR + Camera (AIVI 3D)</span></div>
+        </div>
+        <div class="card-footer">
+          <div class="verdict">PCMag Australia #1 Pick 2026</div>
+          <div class="tagline">🏆 Best All-Rounder</div>
+          <div class="retailers">JB Hi-Fi · The Good Guys</div>
+        </div>
+      </div>
+      
+      <!-- Eufy S1 Pro -->
+      <div class="card s1">
+        <div class="card-header">
+          <div class="brand">Eufy</div>
+          <h3>S1 Pro</h3>
+          <div class="price">$999</div>
+          <div class="was">was $1,807</div>
+          <div class="savings">45% off — Most affordable</div>
+        </div>
+        <div class="card-body">
+          <div class="spec"><span class="label">Suction</span><span class="value">8,000 Pa</span></div>
+          <div class="spec"><span class="label">Mop Type</span><span class="value">HydroJet Roller</span></div>
+          <div class="spec"><span class="label">Obstacle AI</span><span class="value stars">★★★★</span></div>
+          <div class="spec"><span class="label">Base Station</span><span class="value">Empty + Wash + Dry</span></div>
+          <div class="spec"><span class="label">Carpet Lift</span><span class="value">12mm auto-lift</span></div>
+          <div class="spec"><span class="label">Navigation</span><span class="value">LiDAR + Camera</span></div>
+        </div>
+        <div class="card-footer">
+          <div class="verdict">ZDNET "Best Mop Feature"</div>
+          <div class="tagline">🧹 Best Mop</div>
+          <div class="retailers">Eufy AU · Amazon AU · Woolworths</div>
+        </div>
+      </div>
+      
+      <!-- Roborock Qrevo Curv -->
+      <div class="card curv">
+        <div class="card-header">
+          <div class="brand">Roborock</div>
+          <h3>Qrevo Curv</h3>
+          <div class="price">$1,499</div>
+          <div class="was">was $2,799</div>
+          <div class="savings">46% off — Premium features</div>
+        </div>
+        <div class="card-body">
+          <div class="spec"><span class="label">Suction</span><span class="value">18,500 Pa</span></div>
+          <div class="spec"><span class="label">Mop Type</span><span class="value">Dual spinning (extendable)</span></div>
+          <div class="spec"><span class="label">Obstacle AI</span><span class="value stars">★★★★★</span></div>
+          <div class="spec"><span class="label">Base Station</span><span class="value">Empty + Wash + Dry</span></div>
+          <div class="spec"><span class="label">Carpet Lift</span><span class="value">10mm auto-lift</span></div>
+          <div class="spec"><span class="label">Navigation</span><span class="value">LiDAR + Camera + Structured Light</span></div>
+        </div>
+        <div class="card-footer">
+          <div class="verdict">PCMag "Best Multi-Level Floors"</div>
+          <div class="tagline">🧭 Best Navigator</div>
+          <div class="retailers">Roborock ANZ · JB Hi-Fi</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- Full Comparison Table -->
+<section class="section" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <h2>Detailed Comparison</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Ecovacs X8 Pro Omni</th>
+            <th>Eufy S1 Pro</th>
+            <th>Roborock Qrevo Curv</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Price (AUD)</td><td class="highlight">$1,249</td><td class="highlight">$999</td><td>$1,499</td></tr>
+          <tr><td>RRP</td><td>$2,499</td><td>$1,807</td><td>$2,799</td></tr>
+          <tr><td>Suction Power</td><td>18,000 Pa</td><td>8,000 Pa</td><td class="highlight">18,500 Pa</td></tr>
+          <tr><td>Mop Type</td><td>Roller mop (self-cleans during run)</td><td class="highlight">HydroJet roller mop (best-in-class)</td><td>Dual spinning pads (extendable arm)</td></tr>
+          <tr><td>Mop Lifts for Carpet</td><td class="highlight">✅ 15mm auto-lift</td><td>✅ 12mm auto-lift</td><td>✅ 10mm auto-lift</td></tr>
+          <tr><td>Obstacle Avoidance</td><td>AIVI 3D (camera + structured light)</td><td>Camera + AI detection</td><td class="highlight">Reactive AI (camera + structured light + cross-projection)</td></tr>
+          <tr><td>Navigation</td><td>LiDAR + camera</td><td>LiDAR + camera</td><td class="highlight">LiDAR + camera + structured light</td></tr>
+          <tr><td>Unique Feature</td><td>Self-cleaning roller mop mid-run</td><td class="highlight">HydroJet rolling mop — best mopping tested</td><td class="highlight">Self-lifting chassis (40mm threshold crossing)</td></tr>
+          <tr><td>Edge Cleaning</td><td>Standard side brush</td><td>Standard side brush</td><td class="highlight">Extendable mop arm + side brush</td></tr>
+          <tr><td>Self-Emptying</td><td>✅</td><td>✅</td><td>✅</td></tr>
+          <tr><td>Mop Washing</td><td>✅ Hot water</td><td>✅ UniClean station</td><td>✅ Hot water</td></tr>
+          <tr><td>Mop Drying</td><td>✅ Hot air</td><td>✅ Hot air</td><td>✅ Hot air</td></tr>
+          <tr><td>Multi-Floor Maps</td><td>✅ Multiple maps</td><td>✅ Multiple maps</td><td class="highlight">✅ Multiple maps + threshold crossing</td></tr>
+          <tr><td>Voice Control</td><td>Alexa, Google, Siri</td><td>Alexa, Google</td><td>Alexa, Google, Siri</td></tr>
+          <tr><td>Battery Life</td><td>~180 min</td><td>~180 min</td><td>~180 min</td></tr>
+          <tr><td>Dust Bag Capacity</td><td>~75 days</td><td>~60 days</td><td>~60 days</td></tr>
+          <tr><td>Height</td><td>103 mm</td><td>97 mm</td><td>103 mm</td></tr>
+          <tr><td>Expert Rating</td><td class="highlight">PCMag #1 · 4.3★ (JB)</td><td>ZDNET Best Mop · 4.4★</td><td>PCMag Best Multi-Level · 4.2★ (JB)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Obstacle Avoidance Deep Dive -->
+<section class="section">
+  <div class="container">
+    <h2>Obstacle Avoidance — The Lego Test</h2>
+    <p style="text-align:center; color: var(--muted); max-width: 700px; margin: 0 auto 32px;">With two young children and Lego-sized toys on the floor, obstacle avoidance is the single most critical feature. Here's how each model handles it.</p>
+    
+    <div class="avoid-grid">
+      <div class="avoid-card" style="border-top: 4px solid var(--x8);">
+        <h4>Ecovacs X8 Pro Omni</h4>
+        <div class="rating">★★★★★</div>
+        <p><strong>AIVI 3D</strong> uses a front-facing camera combined with structured light to identify and avoid objects as small as 5cm. Recognises toys, cords, shoes, and pet waste. Takes photos of obstacles for review in the app. Among the best in class for avoidance.</p>
+        <p style="font-size:0.8rem; color: var(--muted); margin-top:12px;">⚠️ Still may miss very small items (cat-toy size)</p>
+      </div>
+      
+      <div class="avoid-card" style="border-top: 4px solid var(--s1);">
+        <h4>Eufy S1 Pro</h4>
+        <div class="rating">★★★★</div>
+        <p><strong>Camera-based AI</strong> with obstacle recognition. Reddit users report excellent cord avoidance and decent toy avoidance. Strong for larger obstacles but less refined than the X8 or Curv for very small items. The Eufy X10 Pro Omni variant is specifically praised for cord avoidance.</p>
+        <p style="font-size:0.8rem; color: var(--muted); margin-top:12px;">⚠️ Camera-only system — struggles more in low light</p>
+      </div>
+      
+      <div class="avoid-card" style="border-top: 4px solid var(--orange);">
+        <h4>Roborock Qrevo Curv</h4>
+        <div class="rating">★★★★★</div>
+        <p><strong>Reactive AI</strong> with camera, structured light, and cross-projection. The unique self-lifting chassis <em>physically climbs over</em> some obstacles rather than just avoiding them — particularly effective with cords and medium toys. Industry-leading edge case handling.</p>
+        <p style="font-size:0.8rem; color: var(--muted); margin-top:12px;">⚠️ Still cannot identify/avoid items under ~5cm reliably</p>
+      </div>
+    </div>
+    
+    <p style="text-align:center; color: var(--muted); font-size:0.8rem; margin-top: 24px;"><strong>Honest advice:</strong> No robot vacuum can reliably avoid Lego bricks or very small toys. You'll still want to do a quick floor tidy before scheduled runs. These models are the best available at trying.</p>
+  </div>
+</section>
+
+<!-- Which One? -->
+<section class="section" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <h2>Which One Should You Choose?</h2>
+    <div class="card-grid" style="margin-top: 24px;">
+      
+      <div class="card x8" style="padding: 24px;">
+        <h4 style="color: var(--x8); margin-bottom: 12px;">Choose the Ecovacs X8 Pro Omni if…</h4>
+        <ul style="list-style: none; font-size: 0.9rem;">
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You want the <strong>best all-rounder</strong> as rated by PCMag</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Self-cleaning roller mop <strong>mid-run</strong> matters (no spreading dirt)</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You want the <strong>best value</strong> at current EOFY pricing (50% off)</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Mix of carpet and hard floors with <strong>high mop lift</strong> (15mm)</li>
+          <li style="padding: 6px 0;">✅ You prioritise strong AI obstacle avoidance</li>
+        </ul>
+      </div>
+      
+      <div class="card s1" style="padding: 24px;">
+        <h4 style="color: var(--s1); margin-bottom: 12px;">Choose the Eufy S1 Pro if…</h4>
+        <ul style="list-style: none; font-size: 0.9rem;">
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ <strong>Mopping</strong> is your #1 priority — the HydroJet roller is best-in-class</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Budget-conscious — <strong>lowest price</strong> at $999</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Brand familiarity (Amy's dad already owns and likes Eufy)</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Mostly hard floors with some carpet</li>
+          <li style="padding: 6px 0;">✅ You value the Eufy app experience and ecosystem</li>
+        </ul>
+      </div>
+      
+      <div class="card curv" style="padding: 24px;">
+        <h4 style="color: var(--orange); margin-bottom: 12px;">Choose the Roborock Qrevo Curv if…</h4>
+        <ul style="list-style: none; font-size: 0.9rem;">
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You have <strong>thresholds or multi-level floors</strong> — lifting chassis is unique</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ <strong>Edge and corner cleaning</strong> matters (extendable arm is the best tested)</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ You want the <strong>highest suction</strong> (18,500 Pa)</li>
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--border);">✅ Premium features justify the extra $250 over the X8</li>
+          <li style="padding: 6px 0;">✅ You like the curved design and unique aesthetic</li>
+        </ul>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- EOFY Strategy -->
+<section class="section">
+  <div class="container">
+    <h2>EOFY Buying Strategy</h2>
+    <p style="text-align:center; color: var(--muted); margin-bottom: 32px;">Australian EOFY sales typically begin mid-June and peak June 30. Here's where to watch:</p>
+    <div class="eofy-box">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+        <div>
+          <h3>🏬 JB Hi-Fi</h3>
+          <ul>
+            <li>X8 Pro Omni: <strong>$1,249</strong> (50% off)</li>
+            <li>Qrevo Curv (white): $1,438*</li>
+            <li>Qrevo Curv 2 Flow: $2,499</li>
+            <li style="color: var(--muted); font-size:0.8rem;">*clearance, out of stock<br>Best EOFY track record</li>
+          </ul>
+        </div>
+        <div>
+          <h3>🏬 The Good Guys</h3>
+          <ul>
+            <li>X8 Pro Omni: <strong>$1,249</strong></li>
+            <li style="color: var(--muted); font-size:0.8rem;">Often runs "beat by 20%"<br>promotions during EOFY</li>
+          </ul>
+        </div>
+        <div>
+          <h3>📦 Amazon AU</h3>
+          <ul>
+            <li>Eufy S1 Pro: <strong>$999</strong></li>
+            <li style="color: var(--muted); font-size:0.8rem;">Watch for Prime Day crossover<br>with EOFY timing</li>
+          </ul>
+        </div>
+        <div>
+          <h3>🏭 Direct Stores</h3>
+          <ul>
+            <li>Eufy AU: S1 Pro <strong>$999</strong></li>
+            <li>Roborock ANZ: Curv <strong>$1,499</strong></li>
+            <li style="color: var(--muted); font-size:0.8rem;">Direct stores often undercut<br>retailers during EOFY</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div style="margin-top: 32px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-align: center;">
+      <p style="font-size: 0.95rem; color: var(--muted);">
+        <strong style="color: var(--text);">Bottom line:</strong> 
+        The <span style="color: var(--x8); font-weight: 600;">Ecovacs X8 Pro Omni at $1,249</span> represents the strongest overall package for your needs. 
+        If mopping matters more, save $250 with the <span style="color: var(--s1); font-weight: 600;">Eufy S1 Pro at $999</span>. 
+        If you have tricky thresholds or want the absolute best edge cleaning, the <span style="color: var(--orange); font-weight: 600;">Roborock Qrevo Curv at $1,499</span> is worth the stretch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Research compiled by <a href="https://github.com/gary-the-ai-2026">Gary</a> — personal AI assistant to Josh Hancock.</p>
+  <p>Sources: PCMag Australia (March 2026), ZDNET (December 2025), The Hook Up YouTube, Reddit r/RobotVacuums, Google Shopping Australia.</p>
+  <p style="margin-top: 8px;">Prices as of May 2026. Subject to change during EOFY sales. This is not sponsored content.</p>
+</footer>
+
+</body>
+</html>
